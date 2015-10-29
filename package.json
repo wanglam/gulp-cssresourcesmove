@@ -1,0 +1,17 @@
+{
+  "name": "gulp-cssresourcesmove",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-resources": "^0.2.0",
+    "gulp-util": "^3.0.7",
+    "mkdirp": "^0.5.1",
+    "through2": "^2.0.0"
+  }
+}
