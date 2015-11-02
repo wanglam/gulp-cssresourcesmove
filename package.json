@@ -1,17 +1,26 @@
 {
   "name": "gulp-cssresourcesmove",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "> This is a gulp pulgin for parse css files and move their resource files(fonts/pictures) to the destination path.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "css-resources": "^0.2.0",
     "gulp-util": "^3.0.7",
     "mkdirp": "^0.5.1",
     "through2": "^2.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanglam/gulp-cssresourcesmove.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wanglam/gulp-cssresourcesmove/issues"
+  },
+  "homepage": "https://github.com/wanglam/gulp-cssresourcesmove#readme"
 }
