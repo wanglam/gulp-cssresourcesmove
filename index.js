@@ -31,13 +31,15 @@ var cssResourcesMove = function(options) {
           continue;
         }else if(/^(?:(?:https?:)?\/\/)/.test(imagePath)){
           continue;
+        }else if(/\s*/.test(imagePath)){
+          continue;
         }else if(imagePath.indexOf("/") !== 0){
           imagePath = path.normalize(path.join(path.dirname(file.path),imagePath)).replace(options.WebRoot,"");
         }
         var destPath = options.dest + imagePath;
         var resourcePath = options.WebRoot + imagePath;
         times++;
-        
+
         fs.readFile(resourcePath,function(err,data){
           var targetPath = this.targetPath;
           if(err){
