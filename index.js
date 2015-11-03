@@ -27,41 +27,49 @@ var cssResourcesMove = function(options) {
       }
       for(var idx in images){
         var imagePath = getFilePath(images[idx].path);
+        imagePath = imagePath.trim();
         if(/^data:image/.test(imagePath)){
           continue;
         }else if(/^(?:(?:https?:)?\/\/)/.test(imagePath)){
-          continue;
-        }else if(/\s*/.test(imagePath)){
           continue;
         }else if(imagePath.indexOf("/") !== 0){
           imagePath = path.normalize(path.join(path.dirname(file.path),imagePath)).replace(options.WebRoot,"");
         }
         var destPath = options.dest + imagePath;
         var resourcePath = options.WebRoot + imagePath;
-        times++;
-
-        fs.readFile(resourcePath,function(err,data){
+        fs.stat(resourcePath,function(err,stat){
           var targetPath = this.targetPath;
+          var resourcePath = this.resourcePath;
           if(err){
             if(err.errno === -2){
-              console.log("Can not find file ",err.path);
+              gutil.log("Can not find file ",err.path);
+              complete();
             }else{
               throw err;
             }
-            complete();
-          }else{
-            mkdirp(path.dirname(targetPath), function (err) {
-                if(err){
-                  throw err
-                }else{
-                  fs.writeFile(targetPath,data,function(err){
-                    if(err) throw err;
-                    complete();
-                  });
-                }
+          }else if(stat.isFile()){
+            fs.readFile(resourcePath,function(err,data){
+              if(err){
+                complete();
+              }else{
+                mkdirp(path.dirname(targetPath), function (err) {
+                    if(err){
+                      throw err
+                    }else{
+                      fs.writeFile(targetPath,data,function(err){
+                        if(err) throw err;
+                        complete();
+                      });
+                    }
+                });
+              }
             });
+          }else{
+            complete();
+            gutil.log(resourcePath+" is not a file path!");
           }
-        }.bind({targetPath:destPath}));
+        }.bind({targetPath:destPath,resourcePath:resourcePath}));
+        times++;
       }
       if(times === 0){
         cb(null, file);

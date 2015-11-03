@@ -1,6 +1,6 @@
 {
   "name": "gulp-cssresourcesmove",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "> This is a gulp pulgin for parse css files and move their resource files(fonts/pictures) to the destination path.",
   "main": "index.js",
   "scripts": {
